@@ -29,11 +29,15 @@ let argv = yargs
 
 if (argv.uid) {
   console.log(`dature@${package.version}\n`)
+
   const dir = join(process.cwd(), `./blog-${argv.uid}`)
   const cookie = (argv.cookie || '')
     .replace(/(NowDate|BLOG_TITLE|mblog_userinfo)[^;]*;/g, '')
-  fetch(dir, argv.uid, cookie).then(function() {
-    console.info(`\n备份完毕, 博客存储目录：${dir}\n`)
+
+  console.info(`\n博客存储目录：${dir}\n`)
+
+  fetch(dir, argv.uid, cookie).then(() => {
+    console.info(`\n备份完毕\n`)
   })
 } else {
   yargs.showHelp()

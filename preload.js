@@ -1,7 +1,6 @@
 const fetch = require('./lib/fetch')
 const join = require('path').join
 const { shell } = require('electron')
-const { help } = require('yargs')
 
 const $ = (selector) => document.getElementById(selector)
 
@@ -18,8 +17,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
     console.log = (log) => out.innerHTML += log.replace('\n', '<br>') + '<br>'
 
-    fetch(dir, uid, cookie).then(function() {
-      console.log(`\n备份完毕, 博客存储目录：<a href="${dir}/index.html">${dir}</a>\n`)
+    console.log(`\n博客存储目录：<a href="${dir}/index.html">${dir}</a>\n`)
+
+    fetch(dir, uid, cookie).then(() => {
+      console.log(`\n备份完毕`)
     })
   })
 

@@ -2,7 +2,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-<title>${d.title}</title>
+<title></title>
 <link href="./style.css" rel="stylesheet" />
 <script src="./vue.js"></script>
 <script src="./data.js"></script>
@@ -23,7 +23,7 @@
     <div class="attr">
       <span>时间：{{post.date}}</span>
       <span v-if="post.cate">分类: {{post.cate}}</span>
-      <span v-if="post.tags.length">标签：{{post.tags.join(' ')}}</span>
+      <span v-if="post.tags">标签：{{post.tags.join(' ')}}</span>
       <span v-if="post.link"><a :href="post.link" target="_blank">原文</a></span>
     </div>
     <div class="content" v-html="post.content"></div>
@@ -38,24 +38,25 @@ new Vue({
   el: '#app',
   data() {
     return {
-      key: 0,
+      key: -1,
       len: blog.post.length,
       blog: blog,
-      sideShow: true
+      post: '',
+      sideShow: true,
     }
   },
   mounted() {
     this.resize()
     window.onresize = this.resize
+    document.title = blog.title
+    this.key = localStorage.getItem('key') || 0
   },
   watch: {
-    key() {
+    key(val) {
       window.scrollTo(0, 0)
-    }
-  },
-  computed: {
-    post() {
-      return this.blog.post[this.key]
+      const { link } = this.blog.post[this.key]
+      this.load(link.split('/s/')[1].replace('_', '/').replace('.html', '.js'))
+      localStorage.setItem('ley', val)
     }
   },
   methods: {
@@ -74,6 +75,16 @@ new Vue({
       } else {
         this.sideShow = true 
       }
+    },
+    load(url) {
+      const script = document.createElement('script')
+      script.type = 'text/javascript'
+      script.addEventListener('load', () => {
+        this.post = window.post
+        script.parentNode.removeChild(script)
+      });
+      script.src = url
+      document.getElementsByTagName('head')[0].appendChild(script)
     }
   }
 })
