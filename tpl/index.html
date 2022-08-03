@@ -56,7 +56,7 @@ new Vue({
       window.scrollTo(0, 0)
       const { link } = this.blog.post[this.key]
       this.load(link.split('/s/')[1].replace('_', '/').replace('.html', '.js'))
-      localStorage.setItem('ley', val)
+      localStorage.setItem('key', val)
     }
   },
   methods: {
