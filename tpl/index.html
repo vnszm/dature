@@ -12,7 +12,7 @@
   <div class="side">
     <h1 class="title">{{blog.title}}</h1>
     <ul>
-      <li v-for="it, id in blog.post"><a @click="key = id" v-html="it.title" :class="{active: key == id }"></a></li>
+      <li v-for="it, id in blog.urls"><a @click="key = id" v-html="it.text" :class="{active: key == id }"></a></li>
     </ul>
   </div>
   <div class="head">
@@ -29,8 +29,8 @@
     <div class="content" v-html="post.content"></div>
   </div>
  <div class="foot">
-    <span class="prev" @click="prev" v-html="key > 0 ? blog.post[key - 1].title : ''"></span>
-    <span class="next" @click="next" v-html="key < len - 1 ? blog.post[key + 1].title : ''"></len></span>
+    <span class="prev" @click="prev" v-html="key > 0 ? blog.urls[key - 1].text : ''"></span>
+    <span class="next" @click="next" v-html="key < len - 1 ? blog.urls[key + 1].text : ''"></len></span>
   </div>
 </div>
 <script>
@@ -39,7 +39,7 @@ new Vue({
   data() {
     return {
       key: -1,
-      len: blog.post.length,
+      len: blog.urls.length,
       blog: blog,
       post: '',
       sideShow: true,
@@ -54,8 +54,8 @@ new Vue({
   watch: {
     key(val) {
       window.scrollTo(0, 0)
-      const { link } = this.blog.post[this.key]
-      this.load(link.split('/s/')[1].replace('_', '/').replace('.html', '.js'))
+      const { href } = this.blog.urls[this.key]
+      this.load(href.split('/s/')[1].replace('_', '/').replace('.html', '.js'))
       localStorage.setItem('key', val)
     }
   },
@@ -82,7 +82,14 @@ new Vue({
       script.addEventListener('load', () => {
         this.post = window.post
         script.parentNode.removeChild(script)
-      });
+      })
+      script.addEventListener('error', () => {
+        this.post = {
+          title: this.blog.urls[this.key].text,
+          content: '文章未下载'
+        }
+        script.parentNode.removeChild(script)
+      })
       script.src = url
       document.getElementsByTagName('head')[0].appendChild(script)
     }

@@ -5,29 +5,29 @@ const yargs = require('yargs')
 const fetch = require('./lib/fetch')
 const package = require('./package.json')
 
-process.on('exit', (code) => {
-  console.log(`exit with code: ${code}`)
-})
+// process.on('exit', (code) => {
+//   console.log(`exit with code: ${code}`)
+// })
 
-process.on('SIGHUP', (code) => {
-  console.log(`SIGHUP exit with code: ${code}`)
-})
+// process.on('SIGHUP', (code) => {
+//   console.log(`SIGHUP exit with code: ${code}`)
+// })
 
-process.on('SIGINT', (code) => {
-  console.log(`SIGINT exit with code: ${code}`)
-})
+// process.on('SIGINT', (code) => {
+//   console.log(`SIGINT exit with code: ${code}`)
+// })
 
-process.on('SIGTERM', (code) => {
-  console.log(`SIGTERM exit with code: ${code}`)
-})
+// process.on('SIGTERM', (code) => {
+//   console.log(`SIGTERM exit with code: ${code}`)
+// })
 
-process.on('uncaughtException', (err) => {
-  console.log(`uncaught exception: ${err}`)
-})
+// process.on('uncaughtException', (err) => {
+//   console.log(`uncaught exception: ${err}`)
+// })
 
-process.on('unhandledRejection', (err) => {
-  console.log(`uncaught rejection: ${err}`)
-})
+// process.on('unhandledRejection', (err) => {
+//   console.log(`uncaught rejection: ${err}`)
+// })
 
 let argv = yargs
   .option('u', {

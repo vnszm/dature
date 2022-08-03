@@ -15,6 +15,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
     const dir = join(process.cwd(), `./blog-${uid}`)
 
+    out.innerHTML = '' // 清空
+
     console.log = (log) => out.innerHTML += log.replace('\n', '<br>') + '<br>'
 
     console.log(`\n博客存储目录：<a href="${dir}/index.html">${dir}</a>\n`)
