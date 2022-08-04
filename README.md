@@ -1,10 +1,10 @@
 # dature
 基于 Node.js 的新浪博客备份程序，备份数据包含标题、正文、时间、分类、标签、图片，并生成 HTML 文件
 
-<img src="https://gitee.com/junyiz/dature/raw/master/images/dature.png" width="450" />
+<img src="https://gitee.com/junyiz/dature/raw/master/images/dature.jpg" width="450" />
 
 ## 普通用户
-下载安装，即可使用 [下载地址](https://github.com/junyiz/dature/releases)
+下载([github](https://github.com/junyiz/dature/releases), [gitee](https://gitee.com/junyiz/dature/releases))安装，即可使用
 
 ## 专业用户
 ```bash
